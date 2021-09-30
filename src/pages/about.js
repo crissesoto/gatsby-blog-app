@@ -1,9 +1,21 @@
-import * as React from 'react'
+import React from "react"
+import Layout from "../components/Layout"
+import { graphql } from "gatsby"
 
-const AboutPage = () => {
-    return (
-        <h1>About page</h1>
-    )
+export default function About({data}) {
+  return (
+    <Layout>
+      <h1>{data.site.siteMetadata.title}</h1>
+    </Layout>
+  )
 }
 
-export default AboutPage;
+export const query = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`

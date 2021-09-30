@@ -1,8 +1,11 @@
 import * as React from "react"
+import Layout from "../components/Layout"
 
 const IndexPage = () => {
   return (
+    <Layout>
       <h1>homepage</h1>
+    </Layout>
   )
 }
 
