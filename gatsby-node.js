@@ -1,55 +1,33 @@
-const axios = require("axios");
 
-exports.createPages = async ({actions}) => {
-    console.log(actions)
+exports.createPages = async ({graphql, actions: {createPage}}) => {
 
-    const res = await axios.get("https://jsonplaceholder.typicode.com/users/1/posts");
-    const posts = res.data
+    const result = await graphql(`
+    query {
+        allMarkdownRemark {
+            nodes {
+              excerpt
+              frontmatter {
+                subtitle
+                title
+                slug
+              }
+              id
+            }
+        }
+    }
+  `)
+    const { nodes } = result.data.allMarkdownRemark
 
-    actions.createPage({
-        path: "/posts",
-        component: require.resolve("./src/templates/posts.js"),
-        context: {posts}
-    });
-
-    posts.forEach(post => {
+    // Markdown Content
+    nodes.forEach(node => {
         return (
-            actions.createPage({
-                path: `/posts/post/${post.id}`,
-                component: require.resolve("./src/templates/post.js"),
-                context: {post}
+            createPage({
+                path: `blogs/${node.frontmatter.slug}`,
+                component: require.resolve("./src/templates/blog.js"),
+                context: {
+                    slug: node.frontmatter.slug
+                }
             })
         )
     });
 }
-
-exports.sourceNodes = async ({actions, createNodeId, createContentDigest}) => {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/posts")
-    const posts = res.data
-  
-    posts.forEach(post => {
-      const node = {
-        title: post.title,
-        body: post.body,
-        // The node ID must be globally unique
-        id: createNodeId(`Post-${post.id}`),
-        // id: `Post-${post.id}`,
-        // ID to the parent Node
-        parent: null,
-        // ID to the children Nodes
-        children: [],
-        // internal fields are not usualy interesting for consumers
-        // but are very important for Gatsby Core
-        internal: {
-          // globbaly unique node type
-          type: "Post",
-          // "Hash" or short digital summary of this node
-          contentDigest: createContentDigest(post),
-          // content exposing raw content of this node
-          content: JSON.stringify(post)
-        }
-      }
-  
-      actions.createNode(node)
-    })
-  }
