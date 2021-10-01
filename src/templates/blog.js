@@ -1,30 +1,28 @@
-import { graphql } from "gatsby";
 import React from "react";
 import Layout from "../components/Layout"
+import { graphql } from "gatsby"
+import "./blog.scss"
 
-const Blog = ({data: {markdownRemark}, pageContext: {slug}}) => {
+export default function Blog({data}) {
+  const { html, frontmatter: {title} } = data.markdownRemark
 
-    return (
-        <Layout>
-            <h1>{markdownRemark.frontmatter.title}</h1>
-            <p>{slug}</p>
-            <div dangerouslySetInnerHTML={{__html: markdownRemark.html}} />
-        </Layout>
-    )
+  return (
+    <Layout>
+      <h1>{title}</h1>
+      <div className="blog-content">
+        <div dangerouslySetInnerHTML={{__html: html}}></div>
+      </div>
+    </Layout>
+  )
 }
 
-
-
-export default Blog;
-
 export const query = graphql`
-    query($slug: String) {
-        markdownRemark(frontmatter: {slug: {eq: $slug}}) {
-            html
-            frontmatter {
-                title
-                slug
-              }
-        }
+  query($slug: String) {
+    markdownRemark(frontmatter: {slug: {eq: $slug}}) {
+      html
+      frontmatter {
+        title
+      }
     }
-`;
+  }
+`
