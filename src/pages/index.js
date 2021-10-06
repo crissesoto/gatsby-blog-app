@@ -4,8 +4,9 @@ import {graphql} from "gatsby"
 
 import FeaturedBlog from "./../components/FeaturedBlog"
 import BlogListing from "../components/BlogListing"
+import SearchContainer from "../components/SearchContainer"
 
-export default function IndexPage({data}) {
+export default function IndexPage({data, pageContext}) {
 
   const { nodes } = data.allMarkdownRemark
   return (
@@ -19,7 +20,7 @@ export default function IndexPage({data}) {
         }
       </div>
       <div className="p-4">
-        <BlogListing blogs={nodes} />
+        <BlogListing blogs={nodes} search={() => <SearchContainer searchIndex={pageContext.searchIndex} />} />
       </div>
     </Layout>
   )

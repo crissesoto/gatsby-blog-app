@@ -1,10 +1,13 @@
 import React from "react"
 import Blog from "./Blog"
 
-export default function BlogListing({blogs}) {
+export default function BlogListing({blogs, search: SearchBox}) {
 
   return (
     <>
+    {
+      SearchBox && <SearchBox />
+    }
       <div className="columns is-multiline">
         { blogs.map(({id, frontmatter}) => {
             return (
