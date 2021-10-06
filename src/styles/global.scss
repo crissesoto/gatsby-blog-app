@@ -1,0 +1,7 @@
+/* Makes link non-clickable with not-allowed cursor */
+a[aria-disabled="true"], a[disabled="true"] {
+    cursor: not-allowed;
+}
+a[aria-disabled="true"]:active, a[disabled="true"]:active {
+    pointer-events: none;
+}
