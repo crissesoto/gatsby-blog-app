@@ -2,7 +2,7 @@
 
 Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack architecture.
 
-![demo](https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/client/public/og.png)
+![demo](https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/public/og.png)
 
 ## Built with:
 
