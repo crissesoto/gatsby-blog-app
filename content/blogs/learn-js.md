@@ -1,56 +1,60 @@
 ---
-title: Learn Programming in JS
-subtitle: learn programing, its super cool!
+title: How to Use Promise.allSettled()
+subtitle: Let’s see how Promise.allSettled() works
 date: 2021-10-10
-slug: learn-programming-in-js
-author: Crisse Soto
+slug: how-to-use-promise.allSettled
+author: Dmitri Pavlutin
 rating: 3
-coverImage: https://import.cdn.thinkific.com/335268/8R9DeheYS8CP1Wrtm5Gk_javascript.jpg
+coverImage: https://dmitripavlutin.com/static/84d68613a305e94285c052caa0e5d18f/65311/cover-3.webp
 ---
 
-## Emphasis
-
-**This is bold text**
-
-__This is bold text__
-
-*This is italic text*
-
-_This is italic text_
-
-~~Strikethrough~~
-
-```
-Sample text here...
-```
-
-Syntax highlighting
-
-``` js
-var foo = function (bar) {
-  return bar++;
-};
-
-console.log(foo(5));
-```
-
-
-## Blockquotes
-
-
-> Blockquotes can also be nested...
->> ...by using additional greater-than signs right next to each other...
-> > > ...or with spaces between arrows.
-
-
-## Lists
-
-Unordered
-
-+ Create a list by starting a line with `+`, `-`, or `*`
-+ Sub-lists are made by indenting 2 spaces:
-  - Marker character change forces new list start:
-    * Ac tristique libero volutpat at
-    + Facilisis in pretium nisl aliquet
-    - Nulla volutpat aliquam velit
-+ Very easy!
+<h3 id="1-promiseallsettled" style="position:relative;"><a href="#1-promiseallsettled" aria-label="1 promiseallsettled permalink" class="anchor before"></a>1. <em>Promise.allSettled()</em></h3>
+<p><code>Promise.allSettled()</code> is useful to perform independent async operations in parallel, and collect the result of these operations.</p>
+<p>The function accepts an array (or generally an iterable) of promises as an argument:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statusesPromise</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">.</span><span style="color: #6F42C1">allSettled</span><span style="color: #24292E">(promises);</span></div></code></div></pre>
+<p>When <em>all</em> input <code>promises</code> are being fulfilled or rejected, in parallel, <code>statusesPromise</code> resolves to an array having their statuses:</p>
+<ol style="margin-left: 3vw">
+<li><code>{ status: 'fulfilled', value: value }</code> — if the corresponding promise has fulfilled</li>
+<li>Or <code>{ status: 'rejected', reason: reason }</code> — if the corresponding promise has rejected</li>
+</ol>
+<p></p>
+<p>After all input <code>promises</code> are being resolved, you can extract their statuses using a <code>then</code>-able syntax:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line'><span style="color: #24292E">statusesPromise.</span><span style="color: #6F42C1">then</span><span style="color: #24292E">(</span><span style="color: #E36209">statuses</span><span style="color: #24292E"> </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></div><div class='line'><span style="color: #24292E"> statuses; </span><span style="color: #6A737D">// [{ status: '...', value: '...' }, ...]</span></div><div class='line'><span style="color: #24292E">});</span></div></code></div></pre>
+<p>or using an <code>async/await</code> syntax:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statuses</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> statusesPromise;</span></div><div class='line'></div><div class='line'><span style="color: #24292E">statuses; </span><span style="color: #6A737D">// [{ status: '...', value: '...' }, ...]</span></div></code></div></pre>
+<p>The promise returned by <code>Promise.allSettled()</code> <em>always fulfills with an array of statuses</em>, no matter if some (or even all!) input promises are rejected.</p>
+<h2 id="2-fetching-fruits-and-vegetables" style="position:relative;"><a href="#2-fetching-fruits-and-vegetables" aria-label="2 fetching fruits and vegetables permalink" class="anchor before"></a>2. Fetching fruits and vegetables</h2>
+<p>Before diving into <code>Promise.allSettle()</code>, let’s define 2 simple helper functions.</p>
+<p>First, <code>resolveTimeout(value, delay)</code> — returns a promise that fulfills with <code>value</code> after passing <code>delay</code> time:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line'><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">resolveTimeout</span><span style="color: #24292E">(</span><span style="color: #E36209">value</span><span style="color: #24292E">, </span><span style="color: #E36209">delay</span><span style="color: #24292E">) {</span></div><div class='line'><span style="color: #24292E">  </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">(</span></div><div class='line'><span style="color: #24292E">    </span><span style="color: #E36209">resolve</span><span style="color: #24292E"> </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">setTimeout</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #6F42C1">resolve</span><span style="color: #24292E">(value), delay)</span></div><div class='line'><span style="color: #24292E">  );</span></div><div class='line'><span style="color: #24292E">}</span></div></code></div></pre>
+<p>Second, <code>rejectTimeout(reason, delay)</code> — returns a promise that rejects with <code>reason</code> after passing <code>delay</code> time:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line'><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">rejectTimeout</span><span style="color: #24292E">(</span><span style="color: #E36209">reason</span><span style="color: #24292E">, </span><span style="color: #E36209">delay</span><span style="color: #24292E">) {</span></div><div class='line'><span style="color: #24292E">  </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">(</span></div><div class='line'><span style="color: #24292E">    (</span><span style="color: #E36209">r</span><span style="color: #24292E">, </span><span style="color: #E36209">reject</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">setTimeout</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #6F42C1">reject</span><span style="color: #24292E">(reason), delay)</span></div><div class='line'><span style="color: #24292E">  );</span></div><div class='line'><span style="color: #24292E">}</span></div></code></div></pre>
+<p>Let’s use these helper functions to experiment on <code>Promise.allSettled()</code>.</p>
+<h3 id="21-all-promises-fulfilled" style="position:relative;"><a href="#21-all-promises-fulfilled" aria-label="21 all promises fulfilled permalink" class="anchor before"></a>2.1 All promises fulfilled</h3>
+<p>Let’s access in parallel the vegetables and fruits available at the local grocerry store. Accessing each list is an asynchornous operation:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statusesPromise</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">.</span><span style="color: #6F42C1">allSettled</span><span style="color: #24292E">([</span></div><div class='line highlight'><span style="color: #24292E">  </span><span style="color: #6F42C1">resolveTimeout</span><span style="color: #24292E">([</span><span style="color: #032F62">'potatoes'</span><span style="color: #24292E">, </span><span style="color: #032F62">'tomatoes'</span><span style="color: #24292E">], </span><span style="color: #005CC5">1000</span><span style="color: #24292E">),</span></div><div class='line highlight'><span style="color: #24292E">  </span><span style="color: #6F42C1">resolveTimeout</span><span style="color: #24292E">([</span><span style="color: #032F62">'oranges'</span><span style="color: #24292E">, </span><span style="color: #032F62">'apples'</span><span style="color: #24292E">], </span><span style="color: #005CC5">1000</span><span style="color: #24292E">)</span></div><div class='line dim'><span style="color: #24292E">]);</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// wait...</span></div><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statuses</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> statusesPromise;</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// after 1 second</span></div><div class='line dim'><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(statuses); </span></div><div class='line dim'><span style="color: #6A737D">// [</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'fulfilled', value: ['potatoes', 'tomatoes'] },</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'fulfilled', value: ['oranges', 'apples'] }</span></div><div class='line dim'><span style="color: #6A737D">// ]</span></div></code></div></pre>
+<p><a href="https://codesandbox.io/s/all-resolved-yyc0l?file=/src/index.js">Try the demo.</a></p>
+<p><code>Promise.allSettled([...])</code> returns a promise <code>statusesPromise</code> that resolves in 1 second, right after vegetables and fruits were resolved, in parallel.</p>
+<p>The promise <code>statusesPromise</code> resolves to an array containing the statuses:</p>
+<ol>
+<li>The first item of the array contains the fulfilled status with vegetables: <code>{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }</code></li>
+<li>Same way, the second item is the fulfilled status of fruits: <code>{ status: 'fulfilled', value: ['oranges', 'apples'] }</code>.</li>
+</ol>
+<h3 id="22-one-promise-rejected" style="position:relative;"><a href="#22-one-promise-rejected" aria-label="22 one promise rejected permalink" class="anchor before"></a>2.2 One promise rejected</h3>
+<p>Imagine there are no more fruits at the grocery. In such a case, let’s reject the fruits’ promise.</p>
+<p>How would <code>Promise.allSettled()</code> would work in such a case?</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statusesPromise</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">.</span><span style="color: #6F42C1">allSettled</span><span style="color: #24292E">([</span></div><div class='line dim'><span style="color: #24292E">  </span><span style="color: #6F42C1">resolveTimeout</span><span style="color: #24292E">([</span><span style="color: #032F62">'potatoes'</span><span style="color: #24292E">, </span><span style="color: #032F62">'tomatoes'</span><span style="color: #24292E">], </span><span style="color: #005CC5">1000</span><span style="color: #24292E">),</span></div><div class='line highlight'><span style="color: #24292E">  </span><span style="color: #6F42C1">rejectTimeout</span><span style="color: #24292E">(</span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #005CC5">Error</span><span style="color: #24292E">(</span><span style="color: #032F62">'Out of fruits!'</span><span style="color: #24292E">), </span><span style="color: #005CC5">1000</span><span style="color: #24292E">)</span></div><div class='line dim'><span style="color: #24292E">]);</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// wait...</span></div><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statuses</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> statusesPromise;</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// after 1 second</span></div><div class='line dim'><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(statuses); </span></div><div class='line dim'><span style="color: #6A737D">// [</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'fulfilled', value: ['potatoes', 'tomatoes'] },</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'rejected', reason: Error('Out of fruits!') }</span></div><div class='line dim'><span style="color: #6A737D">// ]</span></div></code></div></pre>
+<p><a href="https://codesandbox.io/s/one-rejected-ij3uo?file=/src/index.js">Try the demo.</a></p>
+<p>The promise returned by <code>Promise.allSettled([...])</code> resolves to an array of statuses after 1 second:</p>
+<ol>
+<li>The first item of the array, since vegetables promise resolved successfully, is <code>{ status: 'fulfilled', value: ['potatoes', 'tomatoes'] }</code></li>
+<li>The second item, because fruits promise rejected with an error, is a rejection status: <code>{ status: 'rejected', reason: Error('Out of fruits') }</code>.</li>
+</ol>
+<p>Even though the second promise in the input array is rejected, the <code>statusesPromise</code> still resolves successfully with an array of statuses.</p>
+<h3 id="23-all-promises-rejected" style="position:relative;"><a href="#23-all-promises-rejected" aria-label="23 all promises rejected permalink" class="anchor before"></a>2.3 All promises rejected</h3>
+<p>What if the grocerry is out of both vegetables and fruits? In such case both promises reject:</p>
+<pre class="shiki github-light" style="background-color: #fff; color: #24292e"><div class="language-id">javascript</div><div class='code-container'><code><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statusesPromise</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #24292E">.</span><span style="color: #6F42C1">allSettled</span><span style="color: #24292E">([</span></div><div class='line highlight'><span style="color: #24292E">  </span><span style="color: #6F42C1">rejectTimeout</span><span style="color: #24292E">(</span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #005CC5">Error</span><span style="color: #24292E">(</span><span style="color: #032F62">'Out of vegetables!'</span><span style="color: #24292E">), </span><span style="color: #005CC5">1000</span><span style="color: #24292E">),</span></div><div class='line highlight'><span style="color: #24292E">  </span><span style="color: #6F42C1">rejectTimeout</span><span style="color: #24292E">(</span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #005CC5">Error</span><span style="color: #24292E">(</span><span style="color: #032F62">'Out of fruits!'</span><span style="color: #24292E">), </span><span style="color: #005CC5">1000</span><span style="color: #24292E">)</span></div><div class='line dim'><span style="color: #24292E">]);</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// wait...</span></div><div class='line dim'><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">statuses</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> statusesPromise;</span></div><div class='line'></div><div class='line dim'><span style="color: #6A737D">// after 1 second</span></div><div class='line dim'><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(statuses); </span></div><div class='line dim'><span style="color: #6A737D">// [</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'rejected', reason: Error('Out of vegetables!')  },</span></div><div class='line dim'><span style="color: #6A737D">//   { status: 'rejected', reason: Error('Out of fruits!') }</span></div><div class='line dim'><span style="color: #6A737D">// ]</span></div></code></div></pre>
+<p><a href="https://codesandbox.io/s/all-rejected-z4jee?file=/src/index.js">Try the demo.</a></p>
+<p>In such a case <code>statusesPromise</code> still resolves successfully to an array of statuses. However, the array contains the statuses of rejected promises.</p>
+<h2 id="3-conclusion" style="position:relative;"><a href="#3-conclusion" aria-label="3 conclusion permalink" class="anchor before"></a>3. Conclusion</h2>
+<p><code>Promise.allSettled(promises)</code> lets you run promises in parallel and collect the statuses (either fulfilled or reject) into an aggregate array.</p>

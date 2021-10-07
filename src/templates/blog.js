@@ -5,7 +5,7 @@ import "./blog.scss"
 import Seo from "./../components/Seo"
 
 export default function Blog({data}) {
-  const { html, frontmatter: {title, subtitle, coverImage}} = data.markdownRemark
+  const { html, frontmatter: {title, subtitle, coverImage, author}} = data.markdownRemark
 
   return (
     <Layout>
@@ -14,9 +14,12 @@ export default function Blog({data}) {
         description={subtitle}
         image={coverImage}
       />
-      <h1>{title}</h1>
+      <h1 className="title is-4">{title}</h1>
       <div className="blog-content">
         <div dangerouslySetInnerHTML={{__html: html}}></div>
+        <div className="mt-6">
+          <h4 className="subtitle is-6">{`Author: ${author}`}</h4>
+        </div>
       </div>
     </Layout>
   )
@@ -30,6 +33,7 @@ export const query = graphql`
         title
         subtitle
         coverImage
+        author
       }
     }
   }
