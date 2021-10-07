@@ -1,11 +1,23 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# CODE-VAULT Gatsby.js Personal Blog App
+
+Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack architecture.
+
+![demo](https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/client/public/og.png)
+
+## Built with:
+
+- [Gatsby](https://www.gatsbyjs.com/)
+- [GraphQL](https://graphql.org/)
+- [Filesystem route API](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/)
+- [react-helmet](https://www.npmjs.com/package/react-helmet)
+- [Bulma](https://bulma.io/)
+- [js-search](https://www.npmjs.com/package/js-search)
+- [prismjs](https://prismjs.com/)
+
+## Test app
+
+Live app: <https://google.com/>
+
 
 ## 🚀 Quick start
 

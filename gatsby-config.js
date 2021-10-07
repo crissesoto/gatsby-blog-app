@@ -1,7 +1,11 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
-    title: "gatsbyBlog",
+    title: "CODE-VAULT | Gatsby.js Personal blog app | Crisse Soto",
+    description: "Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack architecture",
+    body: {
+      content:""
+    }
   },
   plugins: [
     "gatsby-plugin-sass",
@@ -27,6 +31,7 @@ module.exports = {
         ]
       }
     },
+    "gatsby-plugin-react-helmet"
   ],
   
 };
