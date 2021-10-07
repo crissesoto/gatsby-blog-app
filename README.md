@@ -17,7 +17,7 @@ Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack archit
 
 ## Test app
 
-Live app: <https://google.com/>
+Live app: <https://codevaultgatsbyblogapp14689.gatsbyjs.io/>
 
 
 ## 🚀 Quick start
