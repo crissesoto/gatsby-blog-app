@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "gatsby";
 
-export default function AppHeader({seo}) {
+export default function AppHeader() {
+  const [isActive, setisActive] = useState(false)
+
 
   return (
     <nav className="navbar is-transparent mb-5 p-5">
@@ -9,14 +11,22 @@ export default function AppHeader({seo}) {
         <Link className="navbar-item pl-0" to="/">
           <h1 className="title">CODE-VAULT</h1>
         </Link>
-        <div className="navbar-burger" data-target="navbarExampleTransparentExample">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <button
+          onClick={() => {
+            setisActive(!isActive)
+          }}
+          className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
+          aria-label='menu'
+          aria-expanded='false'
+          data-target='navbarBasicExample'
+        >
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+          <span aria-hidden='true'></span>
+        </button>
       </div>
 
-      <div id="navbarExampleTransparentExample" className="navbar-menu">
+      <div id="navbarExampleTransparentExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className="navbar-start">
           <Link className="navbar-item" to="/">
             Home
