@@ -5,3 +5,7 @@ a[aria-disabled="true"], a[disabled="true"] {
 a[aria-disabled="true"]:active, a[disabled="true"]:active {
     pointer-events: none;
 }
+
+.card {
+    height: 100%;
+}
