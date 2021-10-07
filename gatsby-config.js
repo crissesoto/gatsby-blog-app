@@ -43,7 +43,20 @@ module.exports = {
         ]
       }
     },
-    "gatsby-plugin-react-helmet"
+    "gatsby-plugin-react-helmet",
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `CODE-VAULT`,
+        short_name: `CODE-VAULT`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+        icon: "src/images/icon.png"
+      },
+    },
+    "gatsby-plugin-offline"
   ],
   
 };

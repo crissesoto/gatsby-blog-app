@@ -9,3 +9,10 @@ a[aria-disabled="true"]:active, a[disabled="true"]:active {
 .card {
     height: 100%;
 }
+
+@media screen and (max-width: 768px){
+    .columns {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
