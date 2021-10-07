@@ -34,6 +34,9 @@ export default function AppHeader() {
           <Link className="navbar-item" to="/blogs">
             Blogs
           </Link>
+          <Link className="navbar-item" to="/about">
+            About
+          </Link>
         </div>
 
         <div className="navbar-end">

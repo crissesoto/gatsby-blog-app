@@ -11,6 +11,7 @@ export default function About({data}) {
         description="Learn more about CODE-VAULT personal Blog app project made with JAMStack architecture"
       />
       <h1>{data.site.siteMetadata.title}</h1>
+      <p>{process.env.BASE_URL}</p>
     </Layout>
   )
 }

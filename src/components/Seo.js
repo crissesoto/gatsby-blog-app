@@ -2,7 +2,7 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default function Seo({title, description}) {
+export default function Seo({title, description, image}) {
 
   const { site } = useStaticQuery(
     graphql`
@@ -19,6 +19,7 @@ export default function Seo({title, description}) {
 
   const defaultTitle = title ? `${title} | ${site.siteMetadata.title}` : site.siteMetadata?.title;
   const defaultDescription = description || site.siteMetadata?.description;
+  const defaultImage = image || "https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/src/images/og.png"
 
   return (
     <Helmet
@@ -45,7 +46,7 @@ export default function Seo({title, description}) {
         },
         {
           name: "og:image",
-          content: "https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/client/public/og.png"
+          content: defaultImage
         },
         {
           name: "twitter:card",
@@ -65,7 +66,7 @@ export default function Seo({title, description}) {
         },
         {
           name: "twitter:image",
-          content: "https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/client/public/og.png"
+          content: defaultImage
         },
       ]}
     />

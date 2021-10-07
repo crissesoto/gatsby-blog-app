@@ -2,7 +2,7 @@
 
 Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack architecture.
 
-![demo](https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/public/og.png)
+![demo](https://raw.githubusercontent.com/crissesoto/gatsby-blog-app/master/src/images/og.png)
 
 ## Built with:
 
@@ -12,6 +12,7 @@ Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack archit
 - [react-helmet](https://www.npmjs.com/package/react-helmet)
 - [Bulma](https://bulma.io/)
 - [js-search](https://www.npmjs.com/package/js-search)
+- [RSS Feed](https://www.gatsbyjs.com/plugins/gatsby-plugin-feed/)
 - [prismjs](https://prismjs.com/)
 
 ## Test app
