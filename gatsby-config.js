@@ -7,7 +7,7 @@ const rss = require("./utils/rss-options")
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: process.env.BASE_URL,
     title: "CODE-VAULT | Gatsby.js Personal blog app | Crisse Soto",
     description: "Blog app using Gatsby JS(Gatsby v3) framework, React/GraphQL and JAMStack architecture",
     siteUrl: process.env.BASE_URL,
@@ -16,6 +16,7 @@ module.exports = {
     }
   },
   plugins: [
+    "gatsby-plugin-sitemap",
     "gatsby-plugin-sass",
     {
       resolve: "gatsby-plugin-feed",
@@ -70,6 +71,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-offline"
-  ],
+    ],
   
 };
