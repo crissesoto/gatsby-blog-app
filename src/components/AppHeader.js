@@ -37,6 +37,9 @@ export default function AppHeader() {
           <Link className="navbar-item" to="/about">
             About
           </Link>
+          <Link className="navbar-item" to="/contact">
+            Contact
+          </Link>
         </div>
 
         <div className="navbar-end">
