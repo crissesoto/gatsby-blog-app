@@ -5,15 +5,17 @@ import "./blog.scss"
 import Seo from "./../components/Seo"
 
 export default function Blog({data}) {
-  const { html, frontmatter: {title, subtitle, coverImage, author}} = data.markdownRemark
+  const { html, frontmatter: {title, subtitle, coverImage, author, slug}} = data.markdownRemark
+  const seo = {
+    title,
+    subtitle,
+    image: coverImage,
+    url: `/blogs/${slug}`
+  }
 
   return (
-    <Layout>
-      <Seo 
-        title={title}
-        description={subtitle}
-        image={coverImage}
-      />
+    <Layout seo={seo}>
+      <Seo {...seo} />
       <h1 className="title is-4">{title}</h1>
       <div className="blog-content">
         <div dangerouslySetInnerHTML={{__html: html}}></div>
