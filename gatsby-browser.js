@@ -1,3 +1,8 @@
-import 'bulma/css/bulma.min.css'
-import "prismjs/themes/prism-solarizedlight.css"
-import './src/styles/global.scss'
+import React from "react"
+import RootLayout from './src/components/RootLayout'
+
+export const wrapRootElement = ({element}) => {
+    return (
+        <RootLayout>{element}</RootLayout>
+    )
+}
