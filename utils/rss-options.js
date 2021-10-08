@@ -34,7 +34,8 @@ module.exports = {
           }
         `,
         title: "CODE VAULT Blog",
-        output: "/rss.xml"
+        output: "/rss.xml",
+        match: "^/blogs/"
         },
       ]
     }
