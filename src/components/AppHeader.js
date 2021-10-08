@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from "gatsby";
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from "./ThemeProvider"
 
 export default function AppHeader() {
   const [isActive, setisActive] = useState(false)
-  const {theme} = useTheme();
 
   return (
     <nav className="navbar is-transparent mb-5 p-5">
