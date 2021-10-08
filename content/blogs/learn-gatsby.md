@@ -7,6 +7,7 @@ author: Dmitri Pavlutin
 rating: 1
 coverImage: https://dmitripavlutin.com/static/0aa4516e77ea61877637a0dcc74cbfa6/65311/cover-6.webp
 ---
+<img src="https://dmitripavlutin.com/static/0aa4516e77ea61877637a0dcc74cbfa6/65311/cover-6.webp" width="100%"/>
 
 <p>In such cases, with care, you can try to improve the performance of your components using the <a href="https://en.wikipedia.org/wiki/Memoization">memoization</a> technique.</p>
 <p>In this post, I’m going to describe how and when to use the <code>useMemo()</code> React hook.</p>

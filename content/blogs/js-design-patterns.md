@@ -8,6 +8,8 @@ rating: 4
 coverImage: https://dmitripavlutin.com/static/11a2422561b7085c389504232f0b5107/65311/cover.webp
 ---
 
+<img src="https://dmitripavlutin.com/static/11a2422561b7085c389504232f0b5107/65311/cover.webp" width="100%"/>
+
 <h3 id="1-promiseany" style="position:relative;"><a href="#1-promiseany" aria-label="1 promiseany permalink" class="anchor before"></a>1. <em>Promise.any()</em></h3>
 <p><code>Promise.any()</code> is useful to perform independent async operations in a parallel and race manner, to get the value of any first fulfilled promise.</p>
 <p>The function accepts an array (or generally an iterable) of promises as an argument:</p>

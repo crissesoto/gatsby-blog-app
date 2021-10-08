@@ -12,8 +12,8 @@ const NotFoundPage = () => {
                           <h1 class="title">
                             404 Page Not Found
                           </h1>
-                          <h2 class="subtitle">
-                          An unexpected error has occurred. Please contact the site owner.                          </h2>
+                          <h2 class="subtitle">An unexpected error has occurred. Please contact the site owner. </h2>
+                          <Link to="/" className="button is-small is-white">Back Home</Link>
                       </div>
                   </div>
               </div>

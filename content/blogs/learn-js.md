@@ -8,6 +8,8 @@ rating: 3
 coverImage: https://dmitripavlutin.com/static/84d68613a305e94285c052caa0e5d18f/65311/cover-3.webp
 ---
 
+<img src="https://dmitripavlutin.com/static/84d68613a305e94285c052caa0e5d18f/65311/cover-3.webp" width="100%"/>
+
 <h3 id="1-promiseallsettled" style="position:relative;"><a href="#1-promiseallsettled" aria-label="1 promiseallsettled permalink" class="anchor before"></a>1. <em>Promise.allSettled()</em></h3>
 <p><code>Promise.allSettled()</code> is useful to perform independent async operations in parallel, and collect the result of these operations.</p>
 <p>The function accepts an array (or generally an iterable) of promises as an argument:</p>
