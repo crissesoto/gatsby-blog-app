@@ -54,7 +54,7 @@ export default function AppHeader({seo}) {
               <ThemeToggle className="is-flex is-align-self-center mr-5"/>
               <p className="control">
                 <a
-                  className="bd-tw-button button"
+                  className="button is-primary"
                   data-social-network="Twitter"
                   data-social-action="tweet"
                   data-social-target="https://eincode.com"
@@ -64,11 +64,6 @@ export default function AppHeader({seo}) {
                   <span>
                     Tweet
                   </span>
-                </a>
-              </p>
-              <p className="control">
-                <a className="button is-primary" href="/">
-                  <span>Login</span>
                 </a>
               </p>
             </div>
